@@ -34,7 +34,8 @@ if uploaded:
             pix = page.get_pixmap(matrix=mat, alpha=False)
             img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
             # Resize if larger than letter
-            img.thumbnail(LETTER_PX, Image.ANTIALIAS)
+            # use the new Resampling API:
+            img.thumbnail(LETTER_PX, resample=Image.Resampling.LANCZOS)
             images.append(img)
     doc.close()
 
